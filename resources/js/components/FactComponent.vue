@@ -18,12 +18,11 @@ export default {
   },
   methods: {
     getFacts() {
-        let path = process.env.APP_URL + '/api/';
-            console.log(path);
+        let path = 'http://localhost:8080/' + 'api/';
 
-        // this.axios.get($path).then((response) => {
-        //     console.log(response.data);
-        // });
+        this.axios.get(path).then((response) => {
+            console.log(response.data);
+        });
     },
   },
 };
