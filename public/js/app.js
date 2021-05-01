@@ -1920,16 +1920,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      fact: {},
+      info: {}
+    };
+  },
   mounted: function mounted() {
-    console.log("Fact mounted.");
     this.getFacts();
   },
   methods: {
+    //get fatc from api
     getFacts: function getFacts() {
-      var path = 'http://localhost:8080/' + 'api/';
-      this.axios.get(path).then(function (response) {
-        console.log(response.data);
+      var _this = this;
+
+      var path = Vue.config.API_URL + 'api/';
+      this.axios.get(path, this.fact.id ? this.fact.id : '').then(function (response) {
+        _this.fact = response.data.fact;
+        _this.info = response.data.info;
       });
     }
   }
@@ -37636,22 +37651,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [_c("h2", [_vm._v("Facts")])])
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "card mt-4 p-4" }, [
+          _c("h2", { staticStyle: { color: "green", "font-weight": "bold" } }, [
+            _vm._v("Todays new fact:")
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "card",
+              staticStyle: { width: "80%", margin: "auto" }
+            },
+            [
+              _c("div", { staticClass: "card-body" }, [
+                _vm.info
+                  ? _c(
+                      "p",
+                      {
+                        staticClass: "card-text",
+                        staticStyle: { color: "green", "font-style": "italic" }
+                      },
+                      [_vm._v('"' + _vm._s(_vm.info) + '"')]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.fact
+                  ? _c(
+                      "p",
+                      {
+                        staticClass: "card-text",
+                        staticStyle: { color: "green", "font-style": "italic" }
+                      },
+                      [_vm._v('"' + _vm._s(_vm.fact.fact) + '"')]
+                    )
+                  : _vm._e()
+              ])
+            ]
+          )
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -53052,7 +53097,9 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_axios__WEBPACK_IMPORTED_MODULE_3___default.a, axios__WEBPACK_IMPORTED_MODULE_2___default.a); //config
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.config.API_URL = 'http://localhost:8080/';
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('fact-component', __webpack_require__(/*! ./components/FactComponent.vue */ "./resources/js/components/FactComponent.vue")["default"]);
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_4__["routes"]
