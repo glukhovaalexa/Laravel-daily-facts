@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         {
             DB::table('facts')->insert([
                 'fact' => $fact,
-                'created_at' => date("Y-m-d H:i:s")
             ]);
         }
     }
