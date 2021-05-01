@@ -12,6 +12,9 @@ import App from './App.vue';
 Vue.use(VueRouter)
 Vue.use(VueAxios, axios)
 
+//config
+Vue.config.API_URL = 'http://localhost:8080/'
+
 Vue.component('fact-component', require('./components/FactComponent.vue').default);
 
 const router = new VueRouter({
