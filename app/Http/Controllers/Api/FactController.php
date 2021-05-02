@@ -17,15 +17,14 @@ class FactController extends Controller
      **/
     public function index(Request $request)
     {
-        $fact_id = Artisan::call('fact:daily');
-        if($fact_id === 0)
+        $fact = Fact::where(['active' => true])->first();
+        if(!$fact)
         {
-                return response()->json([
-                    'info' => 'Sorry, we are looking for new interesting facts. Try checking tomorrow'
-                ], 200);
-                return;
+            return response()->json([
+                'info' => 'Sorry, we are looking for new interesting facts. Try checking tomorrow'
+            ], 200);
+            return;
         }
-        $fact = Fact::find($fact_id);
         return response()->json(['fact' => $fact], 200);
     }
 }
