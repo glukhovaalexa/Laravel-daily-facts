@@ -45,13 +45,10 @@ class DailyFact extends Command
         {
             $facts = Fact::where('status', 0)->get();
             //there aren`t any facts where status 0
-            // if(count($facts) === 0)
-            // {
-            //     return response()->json([
-            //         'info' => 'Sorry, we are looking for new interesting facts. Try checking tomorrow'
-            //     ], 200);
-            //     return;
-            // }
+            if(count($facts) === 0)
+            {
+                return 0;
+            }
             //generate random key
             $key = rand(0 , count($facts) - 1);
             //get random fact, where status 0
@@ -63,7 +60,7 @@ class DailyFact extends Command
             $fact->save();
         }
 
-        // return response()->json(['fact' => $fact], 200);
+        return $fact->id;
     }
 
     /**
