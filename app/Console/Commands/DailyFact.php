@@ -57,6 +57,7 @@ class DailyFact extends Command
             $fact->created_at = Carbon::now()->format("Y-m-d H:i:s");
             //set status
             $fact->status = 1;
+            $fact->active = 1;
             $fact->save();
         }
 
@@ -78,9 +79,13 @@ class DailyFact extends Command
 
         foreach($factsShowed as $factShowed)
         {
+            $factShowed->active = false;
+            $factShowed->save();
             //diff between current time and created_at
             if($current->diffInMinutes($factShowed->created_at) < env('FACT_TIME'))
             {
+                $factShowed->active = true;
+                $factShowed->save();
                 $fact = $factShowed;
             }
         }
