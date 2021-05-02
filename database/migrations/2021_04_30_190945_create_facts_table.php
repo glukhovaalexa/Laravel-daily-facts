@@ -17,6 +17,7 @@ class CreateFactsTable extends Migration
             $table->id();
             $table->text('fact');
             $table->string('status')->default(0);
+            $table->boolean('active')->default(false);
             $table->timestamps();
         });
     }
